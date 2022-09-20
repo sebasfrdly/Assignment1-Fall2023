@@ -36,11 +36,12 @@ public class VectorToEnemy : MonoBehaviour
         GameObject enemyPosition = GameController.GetEnemyObject();
         GameObject playerPosition = GameController.GetPlayerObject();
 
-        //math for the positio
-        float xSquared = Mathf.Pow(playerPosition.transform.position.x,2);
-        float ySquared = Mathf.Pow(playerPosition.transform.position.y, 2);
-        float zSquared = Mathf.Pow(playerPosition.transform.position.z, 2);
+        //math to convert my Vector3 into a series of floats and calculate the distance between them
+        float xSquared = Mathf.Pow((playerPosition.transform.position.x - enemyPosition.transform.position.x),2);
+        float ySquared = Mathf.Pow((playerPosition.transform.position.y - enemyPosition.transform.position.y), 2);
+        float zSquared = Mathf.Pow((playerPosition.transform.position.z - enemyPosition.transform.position.z), 2);
 
+        //Pythagorean theorem for the final distance
         float distance = Mathf.Sqrt(xSquared + ySquared + zSquared);
 
         Debug.Log(distance);
