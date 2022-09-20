@@ -17,7 +17,7 @@ public class PositionPrefabRelative : MonoBehaviour
         //reference to the player object
         GameObject player = GameController.GetPlayerObject();
 
-        Vector3 displacement = SpawnOffset - player.transform.position;
+        Vector3 displacement =SpawnOffset - player.transform.position;
 
         GameObject bomb = Instantiate<GameObject>(Prefab);
         return bomb;
