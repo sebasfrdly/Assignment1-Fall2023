@@ -13,7 +13,8 @@ public class ShipMotor : MonoBehaviour
     /// <param name="input">The input from the player. The possible range of values for x and y are from -1 to 1.</param>
     public void HandleMovementInput( Vector2 input )
     {
-
+        GameObject player = GameController.GetPlayerObject();
+        
     }
     
 }
