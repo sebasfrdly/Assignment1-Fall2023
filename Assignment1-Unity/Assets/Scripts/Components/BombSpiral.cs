@@ -18,7 +18,35 @@ public class BombSpiral : MonoBehaviour
     /// <returns>An array of the spawned bombs</returns>
     public GameObject[] SpawnBombSpiral()
     {
-        return null;
+        //getting reference tot he player's position and creating a new array
+        var player = GameController.GetPlayerObject().transform.position;
+        var bombSpiral = new GameObject[BombCount];
+
+        float spiralAngleInRadians = BombSpiralInRadians();
+
+        //using a float in this for loop in order to keep my math accurate
+        for(int i = 0; i < BombCount; i++)
+        {
+            //instantiate the bombs
+            bombSpiral[i] = Instantiate<GameObject>(BombPrefab);
+            /*same Formula as PowerupSpawn (point on a circle) this time we will use a Mathf.Lerp so that we don't go through the entire radius
+             * We need to convert i from an int into a float so that the Lerp does not return an integer, and so that the Vectors return properly
+             */
+            bombSpiral[i].transform.position = player + new Vector3(Mathf.Cos(((float)i * spiralAngleInRadians)*Mathf.Lerp(StartRadius, EndRadius, i /BombCount)), Mathf.Sin((float)i * spiralAngleInRadians) * Mathf.Lerp(StartRadius, EndRadius, i / BombCount));
+        }
+        var bombDistance = Vector3.Distance(player, bombSpiral[9].transform.position);
+
+        Debug.Log(bombDistance);
+
+        return bombSpiral;
     }
 
+    //just creating this helper method to modulate some code. For Maximum accuracy we need the angle in Radians
+    float BombSpiralInRadians()
+    {
+        float SpiralAngleInRadians = SpiralAngleInDegrees * Mathf.Deg2Rad;
+
+        return SpiralAngleInRadians;
+    }
+    
 }
