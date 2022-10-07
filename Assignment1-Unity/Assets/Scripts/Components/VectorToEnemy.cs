@@ -44,7 +44,6 @@ public class VectorToEnemy : MonoBehaviour
         //Pythagorean theorem for the final distance
         float distance = Mathf.Sqrt(xSquared + ySquared + zSquared);
 
-        Debug.Log(distance);
         return distance;
     }
     

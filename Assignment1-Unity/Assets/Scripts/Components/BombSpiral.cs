@@ -22,31 +22,25 @@ public class BombSpiral : MonoBehaviour
         var player = GameController.GetPlayerObject().transform.position;
         var bombSpiral = new GameObject[BombCount];
 
-        float spiralAngleInRadians = BombSpiralInRadians();
 
         //using a float in this for loop in order to keep my math accurate
         for(int i = 0; i < BombCount; i++)
         {
             //instantiate the bombs
             bombSpiral[i] = Instantiate<GameObject>(BombPrefab);
-            /*same Formula as PowerupSpawn (point on a circle) this time we will use a Mathf.Lerp so that we don't go through the entire radius
-             * We need to convert i from an int into a float so that the Lerp does not return an integer, and so that the Vectors return properly
-             */
-            bombSpiral[i].transform.position = player + new Vector3(Mathf.Cos(((float)i * spiralAngleInRadians)*Mathf.Lerp(StartRadius, EndRadius, i /BombCount)), Mathf.Sin((float)i * spiralAngleInRadians) * Mathf.Lerp(StartRadius, EndRadius, i / BombCount));
+            //helper variables to organize my code. Turning the angle into Radians and using Lerp to find my start and end points
+            float radiusPositions = Mathf.Lerp(StartRadius, EndRadius, (float) i/BombCount);
+            float spiralAngleInRadians = SpiralAngleInDegrees * Mathf.Deg2Rad;
+            
+            //same Formula as PowerupSpawn (point on a circle) this time we will use a Mathf.Lerp so that we don't go through the entire radius
+            bombSpiral[i].transform.position = player + new Vector3(Mathf.Cos(i * spiralAngleInRadians)*radiusPositions, Mathf.Sin(i * spiralAngleInRadians)*radiusPositions);
         }
         var bombDistance = Vector3.Distance(player, bombSpiral[9].transform.position);
+        
 
-        Debug.Log(bombDistance);
 
         return bombSpiral;
     }
 
-    //just creating this helper method to modulate some code. For Maximum accuracy we need the angle in Radians
-    float BombSpiralInRadians()
-    {
-        float SpiralAngleInRadians = SpiralAngleInDegrees * Mathf.Deg2Rad;
-
-        return SpiralAngleInRadians;
-    }
     
 }
