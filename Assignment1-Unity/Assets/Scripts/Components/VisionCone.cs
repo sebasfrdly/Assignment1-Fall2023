@@ -24,8 +24,10 @@ public class VisionCone : MonoBehaviour
         //creating a float that will hold the value of the arc facing forward relative to the enemy
         float enemyForwardAngle = Mathf.Atan2(enemy.up.y,enemy.up.x) * Mathf.Rad2Deg + 180;
 
+
+        var enemyPosition = player.position - enemy.position;
         //We must convert this to Degrees because our AngleSweepInDegrees is, well, in Degrees 
-        float fullVisionCone = Mathf.Atan2((enemy.up.y * enemy.position.x) - (enemy.up.x* enemy.position.y), (enemy.up.x * enemy.position.x) + (enemy.up.y * enemy.position.y))*Mathf.Rad2Deg;
+        float fullVisionCone = Mathf.Atan2((enemy.up.y * enemyPosition.x) - (enemy.up.x* enemyPosition.y), (enemy.up.x * enemyPosition.x) + (enemy.up.y * enemyPosition.y))*Mathf.Rad2Deg;
 
 
         if (ViewDistance >= GetDistanceToEnemy()) 
