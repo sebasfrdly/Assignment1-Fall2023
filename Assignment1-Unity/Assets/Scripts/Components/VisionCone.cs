@@ -25,7 +25,7 @@ public class VisionCone : MonoBehaviour
         float enemyForwardAngle = Mathf.Atan2(enemy.up.y,enemy.up.x) * Mathf.Rad2Deg + 180;
 
         //We must convert this to Degrees because our AngleSweepInDegrees is, well, in Degrees 
-        float fullVisionCone = Mathf.Atan2(enemy.up.y * enemy.position.x - enemy.up.x* enemy.position.y, enemy.up.x * enemy.position.x + enemy.up.y * enemy.position.y)*Mathf.Rad2Deg;
+        float fullVisionCone = Mathf.Atan2((enemy.up.y * enemy.position.x) - (enemy.up.x* enemy.position.y), (enemy.up.x * enemy.position.x) + (enemy.up.y * enemy.position.y))*Mathf.Rad2Deg;
 
 
         if (ViewDistance >= GetDistanceToEnemy()) 
